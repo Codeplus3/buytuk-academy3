@@ -254,14 +254,30 @@ export function AuthScreen({ onLogin }: Props) {
     }
 
     setLoading(true);
-    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email: regEmail.toLowerCase(),
       password: regPassword,
     });
-    if (signUpError) {
+
+    if (error) {
       setLoading(false);
-      setRegErr(signUpError.message || t("auth.errors.registerFailed"));
+      setRegErr(error.message || t("auth.errors.registerFailed"));
+      console.error("خطأ في التسجيل:", error.message);
       return;
+    }
+
+    if (data?.user) {
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .insert([
+          { id: data.user.id, email: regEmail.toLowerCase(), full_name: regName.trim() },
+        ]);
+
+      if (profileError) {
+        console.error("خطأ في إنشاء البروفايل:", profileError.message);
+      } else {
+        console.log("✅ تم تسجيل الطالب وإنشاء بروفايل له بنجاح!");
+      }
     }
 
     await new Promise(r => setTimeout(r, 600));
