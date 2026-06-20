@@ -13,8 +13,8 @@
  * Uses Logical CSS (marginInlineStart / paddingInline) for RTL support.
  */
 import { useState, useEffect } from "react";
-import { getSocialLinks } from "../lib/social-config";
-import type { SocialLink } from "../lib/social-config";
+import { getSocialLinks } from "@/lib/social-config";
+import type { SocialLink } from "@/lib/social-config";
 
 /* ── Inline SVG icons keyed by social-config id ───────────────── */
 function SocialIcon({ id, size = 16 }: { id: string; size?: number }) {
@@ -145,3 +145,4 @@ export function GlobalSocialLinks({ compact = true }: Props) {
     </div>
   );
 }
+

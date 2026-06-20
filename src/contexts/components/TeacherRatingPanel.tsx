@@ -1,13 +1,13 @@
 import { useState, useMemo } from "react";
-import type { Student, Teacher } from "../lib/db";
+import type { Student, Teacher } from "@/lib/db";
 import {
   getTeachers, getSubjectsForStudent,
   getTeacherRatings, saveTeacherRatings,
   getRatingsForTeacher,
-} from "../lib/db";
-import type { TeacherRating } from "../lib/db";
+} from "@/lib/db";
+import type { TeacherRating } from "@/lib/db";
 import { toast } from "./Toast";
-import { avatarUrl } from "../lib/auth";
+import { avatarUrl } from "@/lib/auth";
 
 /* ─── Student: rate a teacher ───────────────────────────────────────────────── */
 interface StudentProps { role: "student"; student: Student; card: React.CSSProperties; }
@@ -246,3 +246,4 @@ export function TeacherRatingPanel(props: Props) {
   if (props.role === "student") return <StudentRatingView {...props} />;
   return <TeacherRatingsView {...props} />;
 }
+

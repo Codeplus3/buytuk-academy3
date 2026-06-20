@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getHomework, saveHomework, getHomeworkSubmissions, saveHomeworkSubmissions } from "../lib/db";
-import type { Teacher, Subject, Homework, HomeworkSubmission } from "../lib/db";
+import { getHomework, saveHomework, getHomeworkSubmissions, saveHomeworkSubmissions } from "@/lib/db";
+import type { Teacher, Subject, Homework, HomeworkSubmission } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { teacher: Teacher; mySubjects: Subject[]; card: React.CSSProperties; }
@@ -193,3 +193,4 @@ export function TeacherHomeworkPanel({ teacher, mySubjects, card }: Props) {
     </div>
   );
 }
+

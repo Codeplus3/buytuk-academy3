@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ExamEngine, EXAM_DATA } from "../lib/exam-engine";
-import type { ExamState, ExamResult } from "../lib/exam-engine/types";
+import { ExamEngine, EXAM_DATA } from "@/lib/exam-engine";
+import type { ExamState, ExamResult } from "@/lib/exam-engine/types";
 import { toast } from "./Toast";
 
 const AR_LETTERS = ["أ", "ب", "ج", "د"];
@@ -344,3 +344,4 @@ export function ExamModal({ onClose, onComplete }: Props) {
     </div>
   );
 }
+

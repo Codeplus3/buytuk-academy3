@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { Teacher, Subject, Student, TimetableSlot, Weekday } from "../lib/db";
-import { getTimetable, saveTimetable, getTimetableForStudent } from "../lib/db";
+import type { Teacher, Subject, Student, TimetableSlot, Weekday } from "@/lib/db";
+import { getTimetable, saveTimetable, getTimetableForStudent } from "@/lib/db";
 import { toast } from "./Toast";
 
 /* ─── Shared constants ──────────────────────────────────────────────────────── */
@@ -275,3 +275,4 @@ export function TimetablePanel(props: Props) {
   if (props.role === "teacher") return <TeacherTimetable {...props} />;
   return <StudentTimetable {...props} />;
 }
+

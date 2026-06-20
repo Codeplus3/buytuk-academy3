@@ -7,8 +7,8 @@
  * No WebSockets required.
  */
 import { useState } from "react";
-import { getStudents, saveStudents } from "../lib/db";
-import type { Message } from "../lib/db";
+import { getStudents, saveStudents } from "@/lib/db";
+import type { Message } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface SentEntry { to: string; content: string; date: string }
@@ -155,3 +155,4 @@ export function MessageCenter({ card }: Props) {
     </div>
   );
 }
+

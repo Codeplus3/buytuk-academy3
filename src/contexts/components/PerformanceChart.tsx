@@ -1,4 +1,4 @@
-import type { ExamRecord } from "../lib/db";
+import type { ExamRecord } from "@/lib/db";
 
 interface Props { records: ExamRecord[]; card: React.CSSProperties; }
 
@@ -107,3 +107,4 @@ export function PerformanceChart({ records, card }: Props) {
     </div>
   );
 }
+

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { sha256, avatarUrl } from "../lib/auth";
-import { getSupportAgents, saveSupportAgents } from "../lib/db";
-import type { SupportAgent } from "../lib/db";
+import { sha256, avatarUrl } from "@/lib/auth";
+import { getSupportAgents, saveSupportAgents } from "@/lib/db";
+import type { SupportAgent } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -171,3 +171,4 @@ export function SupportAdminPanel({ card }: Props) {
     </div>
   );
 }
+

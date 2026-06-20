@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import type { Subject, Exam, Homework } from "../lib/db";
+import type { Subject, Exam, Homework } from "@/lib/db";
 
 interface Props {
   subjects: Subject[];
@@ -76,3 +76,4 @@ export function GlobalSearch({ subjects, exams, homework, onSelectTab }: Props) 
     </div>
   );
 }
+

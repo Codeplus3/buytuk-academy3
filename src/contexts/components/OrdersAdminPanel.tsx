@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { avatarUrl } from "../lib/auth";
+import { avatarUrl } from "@/lib/auth";
 import {
   getOrderRequests, saveOrderRequests,
   getStudents, saveStudents,
   renewStudentSubscription, getPlans,
-} from "../lib/db";
-import type { OrderRequest } from "../lib/db";
+} from "@/lib/db";
+import type { OrderRequest } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -209,3 +209,4 @@ export function OrdersAdminPanel({ adminEmail, card }: Props) {
     </div>
   );
 }
+

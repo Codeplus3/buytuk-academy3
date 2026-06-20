@@ -2,8 +2,8 @@
  * ProgressReportPDF — طابع تقرير الأداء (HTML → طباعة)
  * يفتح نافذة طباعة بتقرير احترافي يعمل 100% بدون إنترنت
  */
-import type { Student, Subject, ExamRecord, AttendanceRecord, HomeworkSubmission, Homework } from "../lib/db";
-import type { Badge } from "../lib/db";
+import type { Student, Subject, ExamRecord, AttendanceRecord, HomeworkSubmission, Homework } from "@/lib/db";
+import type { Badge } from "@/lib/db";
 
 export function printProgressReport(
   student:   Student,
@@ -168,3 +168,4 @@ export function ProgressReportButton({ student, records, subjects, attRecs, subs
     </button>
   );
 }
+

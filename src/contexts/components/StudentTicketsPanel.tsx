@@ -5,8 +5,8 @@ import {
   getTicketRatings, saveTicketRatings,
   getRepliesForTicket, getRatingForTicket,
   generateTicketRef,
-} from "../lib/db";
-import type { Student, SupportTicket, TicketReply, TicketRating } from "../lib/db";
+} from "@/lib/db";
+import type { Student, SupportTicket, TicketReply, TicketRating } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -313,3 +313,4 @@ export function StudentTicketsPanel({ student, card }: Props) {
     </div>
   );
 }
+

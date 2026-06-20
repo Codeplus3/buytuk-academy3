@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Exam, Question, ExamRecord } from "../lib/db";
+import type { Exam, Question, ExamRecord } from "@/lib/db";
 
 /* ── constants ──────────────────────────────────────────────────────────── */
 const AR   = ["أ", "ب", "ج", "د"];
@@ -294,3 +294,4 @@ export function QuizEngine({ exam, questions, onDone, onExit }: Props) {
     </div>
   );
 }
+

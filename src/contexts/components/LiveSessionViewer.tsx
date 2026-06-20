@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import type { Student, LiveSession } from "../lib/db";
-import { getLiveSessionsForStudent } from "../lib/db";
+import type { Student, LiveSession } from "@/lib/db";
+import { getLiveSessionsForStudent } from "@/lib/db";
 
 interface Props { student: Student; card: React.CSSProperties; }
 
@@ -103,3 +103,4 @@ export function LiveSessionViewer({ student, card }: Props) {
     </div>
   );
 }
+

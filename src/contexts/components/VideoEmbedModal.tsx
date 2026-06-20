@@ -7,8 +7,8 @@
  * Saves directly to localStorage via saveSubjects().
  */
 import { useState } from "react";
-import { getSubjects, saveSubjects } from "../lib/db";
-import type { Subject, EmbedVideo } from "../lib/db";
+import { getSubjects, saveSubjects } from "@/lib/db";
+import type { Subject, EmbedVideo } from "@/lib/db";
 import { toast } from "./Toast";
 
 /* ── URL helpers ─────────────────────────────────────────────────── */
@@ -202,3 +202,4 @@ export function VideoEmbedModal({ subject, addedBy, onClose, onSaved }: Props) {
     </div>
   );
 }
+

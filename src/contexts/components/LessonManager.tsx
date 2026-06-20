@@ -1,9 +1,9 @@
 /* LessonManager — Admin component: manage lessons organized by units per subject */
 import { useState, useRef } from "react";
-import { getLessons, saveLessons, storeLessonFile, ORDINAL_AR } from "../lib/db";
-import type { Lesson } from "../lib/db";
+import { getLessons, saveLessons, storeLessonFile, ORDINAL_AR } from "@/lib/db";
+import type { Lesson } from "@/lib/db";
 import { toast } from "./Toast";
-import { syncEngine } from "../lib/sync-engine";
+import { syncEngine } from "@/lib/sync-engine";
 
 interface Props {
   subjectId: string;
@@ -223,3 +223,4 @@ export function LessonManager({ subjectId, subjectName, onClose }: Props) {
     </div>
   );
 }
+

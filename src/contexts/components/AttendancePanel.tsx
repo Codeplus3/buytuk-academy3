@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { Teacher, Subject } from "../lib/db";
-import { getStudents, getAttendance, saveAttendance } from "../lib/db";
-import type { AttendanceRecord } from "../lib/db";
+import type { Teacher, Subject } from "@/lib/db";
+import { getStudents, getAttendance, saveAttendance } from "@/lib/db";
+import type { AttendanceRecord } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { teacher: Teacher; mySubjects: Subject[]; card: React.CSSProperties; }
@@ -175,3 +175,4 @@ export function AttendancePanel({ teacher, mySubjects, card }: Props) {
     </div>
   );
 }
+

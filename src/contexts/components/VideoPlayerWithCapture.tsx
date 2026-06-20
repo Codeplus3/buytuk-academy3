@@ -20,13 +20,13 @@ import React, {
 } from "react";
 import {
   captureVideoFrame, type VisionFrame,
-} from "../lib/offline-media-engine/skeleton/local-vision-engine";
+} from "@/lib/offline-media-engine/skeleton/local-vision-engine";
 import {
   LocalSTTEngine,
   type STTBackendType,
-} from "../lib/offline-media-engine/skeleton/local-stt-engine";
+} from "@/lib/offline-media-engine/skeleton/local-stt-engine";
 import { getWorkerBridge }
-  from "../lib/offline-media-engine/concrete/worker-bridge";
+  from "@/lib/offline-media-engine/concrete/worker-bridge";
 
 /* ── Phase ────────────────────────────────────────────────────────────── */
 
@@ -691,3 +691,4 @@ export function VideoPlayerWithCapture({
 }
 
 export default VideoPlayerWithCapture;
+

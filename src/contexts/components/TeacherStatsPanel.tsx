@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { getExamRecords, getQuestions } from "../lib/db";
-import type { Teacher, Subject, Exam } from "../lib/db";
+import { getExamRecords, getQuestions } from "@/lib/db";
+import type { Teacher, Subject, Exam } from "@/lib/db";
 
 interface Props { teacher: Teacher; mySubjects: Subject[]; myExams: Exam[]; card: React.CSSProperties; }
 
@@ -135,3 +135,4 @@ export function TeacherStatsPanel({ teacher, mySubjects, myExams, card }: Props)
     </div>
   );
 }
+

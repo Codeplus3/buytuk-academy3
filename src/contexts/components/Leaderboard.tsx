@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import type { Student } from "../lib/db";
-import { getStudents, getExamRecords, computeStudentPoints, computeStudentBadges } from "../lib/db";
-import { avatarUrl } from "../lib/auth";
+import type { Student } from "@/lib/db";
+import { getStudents, getExamRecords, computeStudentPoints, computeStudentBadges } from "@/lib/db";
+import { avatarUrl } from "@/lib/auth";
 
 interface Props { student: Student; card: React.CSSProperties; }
 
@@ -155,3 +155,4 @@ export function Leaderboard({ student, card }: Props) {
     </div>
   );
 }
+

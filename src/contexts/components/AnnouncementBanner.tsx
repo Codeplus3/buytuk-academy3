@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getAnnouncements } from "../lib/db";
-import type { Announcement } from "../lib/db";
+import { getAnnouncements } from "@/lib/db";
+import type { Announcement } from "@/lib/db";
 
 const TYPE_STYLE: Record<Announcement["type"], { bg: string; border: string; color: string; icon: string }> = {
   info:    { bg: "rgba(59,130,246,0.1)",  border: "rgba(59,130,246,0.35)",  color: "#3b82f6", icon: "ℹ️" },
@@ -50,3 +50,4 @@ export function AnnouncementBanner() {
     </div>
   );
 }
+

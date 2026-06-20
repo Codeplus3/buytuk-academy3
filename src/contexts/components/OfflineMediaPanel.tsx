@@ -1,16 +1,16 @@
 /* ─── OfflineMediaEngine — Student UI Panel ─── */
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { OfflineMediaEngine } from "../lib/offline-media-engine";
+import { OfflineMediaEngine } from "@/lib/offline-media-engine";
 import type {
   MediaEngineCapabilities, BookMetadata, TextChunk,
   VectorSearchResult, TutorMessage,
-} from "../lib/offline-media-engine";
-import type { AITutor } from "../lib/offline-media-engine/ai-tutor";
+} from "@/lib/offline-media-engine";
+import type { AITutor } from "@/lib/offline-media-engine/ai-tutor";
 import {
   LocalSTTEngine,
   type STTBackendType,
-} from "../lib/offline-media-engine/skeleton/local-stt-engine";
+} from "@/lib/offline-media-engine/skeleton/local-stt-engine";
 import { VOICES } from "./VoiceProfilesPanel";
 
 const ACTIVE_VOICE_KEY = "buytuk_active_voice";
@@ -658,3 +658,4 @@ export function OfflineMediaPanel({ studentEmail, hideStatus = false }: Props) {
     </div>
   );
 }
+

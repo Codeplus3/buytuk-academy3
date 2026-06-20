@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { Teacher, Subject, LiveSession } from "../lib/db";
-import { getLiveSessions, saveLiveSessions } from "../lib/db";
+import type { Teacher, Subject, LiveSession } from "@/lib/db";
+import { getLiveSessions, saveLiveSessions } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { teacher: Teacher; mySubjects: Subject[]; card: React.CSSProperties; }
@@ -187,3 +187,4 @@ export function LiveSessionPanel({ teacher, mySubjects, card }: Props) {
     </div>
   );
 }
+

@@ -4,7 +4,7 @@
  */
 
 import { useState, useRef, useEffect } from "react";
-import type { Teacher, Subject } from "../lib/db";
+import type { Teacher, Subject } from "@/lib/db";
 import {
   getSubjects,
   getAudioLessons,
@@ -12,7 +12,7 @@ import {
   saveAudioBlob,
   deleteAudioBlob,
   type AudioLesson,
-} from "../lib/db";
+} from "@/lib/db";
 
 interface Props {
   teacher: Teacher;
@@ -271,3 +271,4 @@ export function AudioLessonUploadPanel({ teacher, card }: Props) {
     </div>
   );
 }
+

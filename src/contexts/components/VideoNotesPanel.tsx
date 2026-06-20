@@ -4,8 +4,8 @@
  * تظهر كعلامات ملونة على شريط التقدم
  */
 import { useState, useRef, useEffect } from "react";
-import type { Student } from "../lib/db";
-import { getNotesForSubject, getVideoNotes, saveVideoNotes, type VideoNote } from "../lib/db";
+import type { Student } from "@/lib/db";
+import { getNotesForSubject, getVideoNotes, saveVideoNotes, type VideoNote } from "@/lib/db";
 
 const COLORS: VideoNote["color"][] = ["yellow", "green", "blue", "red"];
 const COLOR_HEX: Record<VideoNote["color"], string> = {
@@ -186,3 +186,4 @@ export function VideoNotesPanel({ subjectId, student, videoRef, duration, card, 
     </div>
   );
 }
+

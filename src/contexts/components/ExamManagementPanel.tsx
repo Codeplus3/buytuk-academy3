@@ -8,7 +8,7 @@
  *
  * Role-guard: form and action buttons render only when userRole === "teacher".
  */
-import type { Subject, Exam, Question } from "../lib/db";
+import type { Subject, Exam, Question } from "@/lib/db";
 
 /* ── Types ─────────────────────────────────────────────────────────── */
 export interface ExamFormState {
@@ -442,3 +442,4 @@ export function ExamManagementPanel({
     </div>
   );
 }
+

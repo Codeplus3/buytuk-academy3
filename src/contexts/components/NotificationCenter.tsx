@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { getNotifications, saveNotifications } from "../lib/db";
-import type { AppNotification } from "../lib/db";
+import { getNotifications, saveNotifications } from "@/lib/db";
+import type { AppNotification } from "@/lib/db";
 
 interface Props { studentId: number; }
 
@@ -94,3 +94,4 @@ export function NotificationCenter({ studentId }: Props) {
     </div>
   );
 }
+

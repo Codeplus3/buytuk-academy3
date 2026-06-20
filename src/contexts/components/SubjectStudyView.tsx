@@ -1,10 +1,10 @@
 /* ─── SubjectStudyView — Interactive Per-Subject Study Interface ─── */
 import { useState, useEffect, useRef } from "react";
-import { loadCurriculumFile } from "../lib/db";
-import type { Subject } from "../lib/db";
-import { OfflineMediaEngine } from "../lib/offline-media-engine";
-import type { BookMetadata, TextChunk, TutorMessage } from "../lib/offline-media-engine";
-import type { AITutor } from "../lib/offline-media-engine/ai-tutor";
+import { loadCurriculumFile } from "@/lib/db";
+import type { Subject } from "@/lib/db";
+import { OfflineMediaEngine } from "@/lib/offline-media-engine";
+import type { BookMetadata, TextChunk, TutorMessage } from "@/lib/offline-media-engine";
+import type { AITutor } from "@/lib/offline-media-engine/ai-tutor";
 
 const engine = OfflineMediaEngine.getInstance();
 
@@ -370,3 +370,4 @@ export function SubjectStudyView({ subject, studentEmail, onBack }: Props) {
     </div>
   );
 }
+

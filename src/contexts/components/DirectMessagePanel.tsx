@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import type { Student, Teacher } from "../lib/db";
-import { getStudents, getTeachers, getThread, sendDM, getDirectMessages } from "../lib/db";
+import type { Student, Teacher } from "@/lib/db";
+import { getStudents, getTeachers, getThread, sendDM, getDirectMessages } from "@/lib/db";
 
 interface StudentProps { role: "student"; user: Student; card: React.CSSProperties; }
 interface TeacherProps { role: "teacher"; user: Teacher; card: React.CSSProperties; }
@@ -169,3 +169,4 @@ export function DirectMessagePanel(props: Props) {
     </div>
   );
 }
+

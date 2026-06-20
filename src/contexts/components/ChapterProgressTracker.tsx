@@ -3,8 +3,8 @@
  * يعرض الفصول مع حالة القراءة ويسمح بتحديد الفصل الحالي
  */
 import { useState, useEffect } from "react";
-import type { Student } from "../lib/db";
-import { getProgressForStudent, markChapterRead } from "../lib/db";
+import type { Student } from "@/lib/db";
+import { getProgressForStudent, markChapterRead } from "@/lib/db";
 
 const SUBJECT_CHAPTERS: Record<string, string[]> = {
   "رياضيات": ["الاشتقاق والتكامل","المعادلات التربيعية","المتتاليات والمتسلسلات","الهندسة التحليلية","اللوغاريتمات"],
@@ -144,3 +144,4 @@ export function ChapterProgressTracker({ subjectId, subjectName, student, card, 
     </div>
   );
 }
+

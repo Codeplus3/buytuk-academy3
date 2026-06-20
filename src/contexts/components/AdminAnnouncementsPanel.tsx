@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getAnnouncements, saveAnnouncements } from "../lib/db";
-import type { Announcement } from "../lib/db";
+import { getAnnouncements, saveAnnouncements } from "@/lib/db";
+import type { Announcement } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { card: React.CSSProperties; }
@@ -125,3 +125,4 @@ export function AdminAnnouncementsPanel({ card }: Props) {
     </div>
   );
 }
+

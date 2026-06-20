@@ -11,8 +11,8 @@
  */
 
 import { useState, useEffect, useRef } from "react";
-import type { BookMetadata, TextChunk } from "../lib/offline-media-engine";
-import { OfflineMediaEngine } from "../lib/offline-media-engine";
+import type { BookMetadata, TextChunk } from "@/lib/offline-media-engine";
+import { OfflineMediaEngine } from "@/lib/offline-media-engine";
 import { VOICES } from "./VoiceProfilesPanel";
 
 const engine = OfflineMediaEngine.getInstance();
@@ -445,3 +445,4 @@ const ctrlBtn: React.CSSProperties = {
   cursor: "pointer", fontSize: 13, fontWeight: 700,
   fontFamily: "inherit", color: "var(--text)",
 };
+

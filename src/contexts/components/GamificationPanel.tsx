@@ -1,6 +1,6 @@
 import { useMemo } from "react";
-import { computeStudentPoints, computeStudentBadges } from "../lib/db";
-import type { ExamRecord, Badge } from "../lib/db";
+import { computeStudentPoints, computeStudentBadges } from "@/lib/db";
+import type { ExamRecord, Badge } from "@/lib/db";
 
 interface Props { records: ExamRecord[]; card: React.CSSProperties; }
 
@@ -126,3 +126,4 @@ export function GamificationPanel({ records, card }: Props) {
     </div>
   );
 }
+

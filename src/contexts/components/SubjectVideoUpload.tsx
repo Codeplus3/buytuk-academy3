@@ -10,7 +10,7 @@
  * Role-guard: upload button is rendered only when userRole === "teacher".
  */
 import { useRef } from "react";
-import type { Subject } from "../lib/db";
+import type { Subject } from "@/lib/db";
 
 interface Props {
   subject:          Subject;
@@ -450,3 +450,4 @@ export function SubjectVideoUpload({
     </div>
   );
 }
+

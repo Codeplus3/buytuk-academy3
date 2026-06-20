@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import type { Student, Subject, StudyNote } from "../lib/db";
-import { getStudyNotes, saveStudyNotes } from "../lib/db";
+import type { Student, Subject, StudyNote } from "@/lib/db";
+import { getStudyNotes, saveStudyNotes } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { student: Student; subjects: Subject[]; card: React.CSSProperties; }
@@ -208,3 +208,4 @@ export function StudyNotesPanel({ student, subjects, card }: Props) {
     </div>
   );
 }
+

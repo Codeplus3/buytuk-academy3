@@ -1,4 +1,4 @@
-import type { ExamRecord, Student, Subject } from "../lib/db";
+import type { ExamRecord, Student, Subject } from "@/lib/db";
 
 interface Props {
   record:  ExamRecord;
@@ -96,3 +96,4 @@ export function CertificateModal({ record, student, subject, onClose }: Props) {
     </div>
   );
 }
+

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
-import type { Student } from "../lib/db";
-import { getAttendanceForStudent } from "../lib/db";
-import type { AttendanceRecord } from "../lib/db";
+import type { Student } from "@/lib/db";
+import { getAttendanceForStudent } from "@/lib/db";
+import type { AttendanceRecord } from "@/lib/db";
 
 interface Props { student: Student; card: React.CSSProperties; }
 
@@ -128,3 +128,4 @@ export function StudentAttendanceView({ student, card }: Props) {
     </div>
   );
 }
+

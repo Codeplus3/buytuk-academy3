@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { getSocialLinks, saveSocialLinks } from "../lib/social-config";
-import type { SocialLink } from "../lib/social-config";
+import { getSocialLinks, saveSocialLinks } from "@/lib/social-config";
+import type { SocialLink } from "@/lib/social-config";
 import { toast } from "./Toast";
 
 const SOCIAL_META: Record<string, { emoji: string; label: string; placeholder: string }> = {
@@ -133,3 +133,4 @@ export function AdminSettingsPanel({ card }: Props) {
     </div>
   );
 }
+

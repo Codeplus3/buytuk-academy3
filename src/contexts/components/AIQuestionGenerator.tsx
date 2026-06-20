@@ -4,8 +4,8 @@
  * يعمل 100% بدون إنترنت باستخدام خوارزمية ذكية لتحليل النص
  */
 import { useState } from "react";
-import type { Teacher, Subject, Question } from "../lib/db";
-import { getQuestions, saveQuestions } from "../lib/db";
+import type { Teacher, Subject, Question } from "@/lib/db";
+import { getQuestions, saveQuestions } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -320,3 +320,4 @@ export function AIQuestionGenerator({ teacher, subjects, onAdded, card }: Props)
     </div>
   );
 }
+

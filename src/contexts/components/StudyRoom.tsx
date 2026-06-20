@@ -23,21 +23,21 @@ import type { RefObject } from "react";
 import { VideoPlayerWithCapture }
   from "./VideoPlayerWithCapture";
 import { loadCurriculumFile, loadVideoFile }
-  from "../lib/db";
+  from "@/lib/db";
 import type { Subject }
-  from "../lib/db";
+  from "@/lib/db";
 import { OfflineMediaEngine }
-  from "../lib/offline-media-engine";
+  from "@/lib/offline-media-engine";
 import type { TutorMessage }
-  from "../lib/offline-media-engine";
+  from "@/lib/offline-media-engine";
 import type { AITutor }
-  from "../lib/offline-media-engine/ai-tutor";
+  from "@/lib/offline-media-engine/ai-tutor";
 import { useLanguage }
   from "@/contexts/LanguageContext";
 import { extractFramesAndEmbeddings }
-  from "../lib/video-analyzer";
+  from "@/lib/video-analyzer";
 import type { VideoAnalysisProgress }
-  from "../lib/video-analyzer";
+  from "@/lib/video-analyzer";
 
 /* ── Shared singleton engine ──────────────────────────────────────────── */
 
@@ -781,3 +781,4 @@ export function StudyRoom({ subject, studentEmail, onBack }: StudyRoomProps) {
 }
 
 export default StudyRoom;
+

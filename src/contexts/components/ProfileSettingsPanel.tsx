@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { getTeachers, saveTeachers } from "../lib/db";
+import { getTeachers, saveTeachers } from "@/lib/db";
 import { UserAvatar } from "./UserAvatar";
 import { toast } from "./Toast";
 
@@ -127,3 +127,4 @@ export function ProfileSettingsPanel({
     </div>
   );
 }
+

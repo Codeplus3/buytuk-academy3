@@ -3,8 +3,8 @@
  * الطالب يكتب سؤاله، المدرس يجيب من لوحته
  */
 import { useState } from "react";
-import type { Student, Teacher } from "../lib/db";
-import { getQAsForChapter, getQAsForTeacher, getChapterQAs, saveChapterQAs, type ChapterQA } from "../lib/db";
+import type { Student, Teacher } from "@/lib/db";
+import { getQAsForChapter, getQAsForTeacher, getChapterQAs, saveChapterQAs, type ChapterQA } from "@/lib/db";
 
 const CHAPTERS: Record<string, string[]> = {
   "رياضيات": ["الاشتقاق والتكامل","المعادلات التربيعية","المتتاليات والمتسلسلات","الهندسة التحليلية","اللوغاريتمات"],
@@ -223,3 +223,4 @@ export function ChapterQATeacherPanel({ subjectId, subjectName, teacher, card }:
     </div>
   );
 }
+

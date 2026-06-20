@@ -3,8 +3,8 @@ import {
   getSubjects, getPlans,
   getPremiumSubjects, isStudentSubscribed,
   getOrderRequests, submitOrderRequest,
-} from "../lib/db";
-import type { Student, SubscriptionPlan } from "../lib/db";
+} from "@/lib/db";
+import type { Student, SubscriptionPlan } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -317,3 +317,4 @@ export function Storefront({ student, card, onGoToTickets }: Props) {
 
 /* Type alias to avoid import complexity */
 type OrderRequest_paymentMethod = "bank_transfer" | "vodafone_cash" | "whatsapp_receipt";
+

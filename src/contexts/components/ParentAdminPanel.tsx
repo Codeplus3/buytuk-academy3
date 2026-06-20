@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { sha256, avatarUrl } from "../lib/auth";
-import { getParents, saveParents, getStudents } from "../lib/db";
-import type { Parent } from "../lib/db";
+import { sha256, avatarUrl } from "@/lib/auth";
+import { getParents, saveParents, getStudents } from "@/lib/db";
+import type { Parent } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props {
@@ -198,3 +198,4 @@ export function ParentAdminPanel({ card }: Props) {
     </div>
   );
 }
+

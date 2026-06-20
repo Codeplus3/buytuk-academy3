@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { Exam, Subject } from "../lib/db";
+import type { Exam, Subject } from "@/lib/db";
 
 interface Props { exams: Exam[]; subjects: Subject[]; card: React.CSSProperties; }
 
@@ -141,3 +141,4 @@ export function ExamCalendar({ exams, subjects, card }: Props) {
     </div>
   );
 }
+

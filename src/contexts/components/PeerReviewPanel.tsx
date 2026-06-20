@@ -1,10 +1,10 @@
 import { useState, useMemo } from "react";
-import type { Student } from "../lib/db";
+import type { Student } from "@/lib/db";
 import {
   getHomework, getHomeworkSubmissions, saveHomeworkSubmissions,
   getPeerReviews, savePeerReviews,
-} from "../lib/db";
-import type { HomeworkSubmission, PeerReview } from "../lib/db";
+} from "@/lib/db";
+import type { HomeworkSubmission, PeerReview } from "@/lib/db";
 import { toast } from "./Toast";
 
 interface Props { student: Student; card: React.CSSProperties; }
@@ -195,3 +195,4 @@ export function PeerReviewPanel({ student, card }: Props) {
     </div>
   );
 }
+

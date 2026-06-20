@@ -13,8 +13,8 @@
  */
 
 import { useState, useEffect, useRef, useMemo } from "react";
-import type { Subject } from "../lib/db";
-import { loadCurriculumFile, loadVideoFile, getStudents } from "../lib/db";
+import type { Subject } from "@/lib/db";
+import { loadCurriculumFile, loadVideoFile, getStudents } from "@/lib/db";
 import { StudyRoom } from "./StudyRoom";
 import { BookTextReader } from "./BookTextReader";
 import { AudioLessonPlayer } from "./AudioLessonPlayer";
@@ -25,7 +25,7 @@ import {
   downloadAndInstallBundle,
   getBundleInstallInfo,
   type BundleProgress,
-} from "../lib/bundle-manager";
+} from "@/lib/bundle-manager";
 import { toast } from "./Toast";
 
 /* ── Props ─────────────────────────────────────────────────────────────────── */
@@ -435,3 +435,4 @@ export function BookViewer({ subject, studentEmail, onClose }: BookViewerProps) 
     </div>
   );
 }
+

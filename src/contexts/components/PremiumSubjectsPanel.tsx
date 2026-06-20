@@ -5,8 +5,8 @@ import {
   isStudentSubscribed, renewStudentSubscription,
   getPremiumSubjects, toggleSubjectPremium,
   getPlans,
-} from "../lib/db";
-import { avatarUrl } from "../lib/auth";
+} from "@/lib/db";
+import { avatarUrl } from "@/lib/auth";
 import { toast } from "./Toast";
 
 interface Props {
@@ -221,3 +221,4 @@ export function PremiumSubjectsPanel({ card }: Props) {
     </div>
   );
 }
+

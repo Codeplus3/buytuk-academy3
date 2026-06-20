@@ -1,7 +1,7 @@
 /* LessonLibrary — Student component for browsing book lessons by unit */
 import { useState, useEffect } from "react";
-import { getLessons, loadLessonFile, getSubjects } from "../lib/db";
-import type { Lesson } from "../lib/db";
+import { getLessons, loadLessonFile, getSubjects } from "@/lib/db";
+import type { Lesson } from "@/lib/db";
 
 interface Props {
   studentSubjectIds?: string[];
@@ -170,3 +170,4 @@ export function LessonLibrary({ studentSubjectIds }: Props) {
     </div>
   );
 }
+

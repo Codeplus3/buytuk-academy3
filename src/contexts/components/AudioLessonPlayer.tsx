@@ -8,7 +8,7 @@ import {
   getAudioLessonsForSubject,
   loadAudioBlob,
   type AudioLesson,
-} from "../lib/db";
+} from "@/lib/db";
 
 interface Props {
   subjectId:   string;
@@ -308,3 +308,4 @@ const iconBtn: React.CSSProperties = {
   color: "var(--text)", cursor: "pointer",
   fontSize: 12, fontFamily: "inherit", fontWeight: 600,
 };
+
