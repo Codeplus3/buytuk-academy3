@@ -29,6 +29,7 @@ import { syncEngine } from "../lib/sync-engine";
 import { ParticleBackground } from "@/contexts/components/ParticleBackground";
 import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
+import { supabase } from "../lib/supabaseClient";
 
 type Role     = "admin" | "school-admin" | "teacher" | "student" | "parent" | "support";
 type AuthMode = "login" | "register" | "recovery";
@@ -253,6 +254,16 @@ export function AuthScreen({ onLogin }: Props) {
     }
 
     setLoading(true);
+    const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      email: regEmail.toLowerCase(),
+      password: regPassword,
+    });
+    if (signUpError) {
+      setLoading(false);
+      setRegErr(signUpError.message || t("auth.errors.registerFailed"));
+      return;
+    }
+
     await new Promise(r => setTimeout(r, 600));
     const hashed: string = await sha256(regPassword);
     const student: Student = {

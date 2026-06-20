@@ -6,10 +6,32 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react"
-import { DayButton, DayPicker, getDefaultClassNames } from "react-day-picker"
+import { DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
 import { Button, buttonVariants } from "@/components/ui/button"
+
+type CalendarDayButtonProps = React.ComponentProps<typeof Button> & {
+  day: { date: Date };
+  modifiers: Record<string, boolean>;
+};
+
+type CalendarRootProps = {
+  className?: string;
+  rootRef?: React.LegacyRef<HTMLDivElement>;
+  [key: string]: any;
+};
+
+type CalendarChevronProps = {
+  className?: string;
+  orientation?: string;
+  [key: string]: any;
+};
+
+type CalendarWeekNumberProps = {
+  children: React.ReactNode;
+  [key: string]: any;
+};
 
 function Calendar({
   className,
@@ -125,7 +147,7 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        Root: ({ className, rootRef, ...props }) => {
+        Root: ({ className, rootRef, ...props }: CalendarRootProps) => {
           return (
             <div
               data-slot="calendar"
@@ -135,7 +157,7 @@ function Calendar({
             />
           )
         },
-        Chevron: ({ className, orientation, ...props }) => {
+        Chevron: ({ className, orientation, ...props }: CalendarChevronProps) => {
           if (orientation === "left") {
             return (
               <ChevronLeftIcon className={cn("size-4", className)} {...props} />
@@ -156,7 +178,7 @@ function Calendar({
           )
         },
         DayButton: CalendarDayButton,
-        WeekNumber: ({ children, ...props }) => {
+        WeekNumber: ({ children, ...props }: CalendarWeekNumberProps) => {
           return (
             <td {...props}>
               <div className="flex size-[--cell-size] items-center justify-center text-center">
@@ -177,7 +199,7 @@ function CalendarDayButton({
   day,
   modifiers,
   ...props
-}: React.ComponentProps<typeof DayButton>) {
+}: CalendarDayButtonProps) {
   const defaultClassNames = getDefaultClassNames()
 
   const ref = React.useRef<HTMLButtonElement>(null)

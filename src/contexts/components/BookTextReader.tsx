@@ -112,7 +112,7 @@ export function BookTextReader({ subject, subjectIcon, card }: Props) {
   };
 
   /* ── Engine state (async books) ─────────────────────────────────────────── */
-  const [engineBooks, setEngineBooks] = useState<import("../lib/offline-media-engine").BookMetadata[]>([]);
+  const [engineBooks, setEngineBooks] = useState<BookMetadata[]>([]);
   const [engineChunks, setEngineChunks] = useState<TextChunk[]>([]);
   const [engineReady, setEngineReady]   = useState(false);
 
