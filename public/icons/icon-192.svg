@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" width="192" height="192">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="192" height="192" rx="40" fill="url(#bg)"/>
+  <!-- Mortarboard flat top (diamond/parallelogram shape) -->
+  <polygon points="96,46 158,74 96,102 34,74" fill="white" opacity="0.95"/>
+  <!-- Mortarboard body -->
+  <path d="M60 82 L60 128 Q60 136 68 140 Q96 152 124 140 Q132 136 132 128 L132 82 L96 96 Z" fill="white" opacity="0.88"/>
+  <!-- Tassel cord -->
+  <circle cx="158" cy="74" r="6" fill="#fbbf24"/>
+  <line x1="158" y1="80" x2="158" y2="132" stroke="#fbbf24" stroke-width="4" stroke-linecap="round"/>
+  <!-- Tassel end -->
+  <circle cx="158" cy="136" r="10" fill="#fbbf24" opacity="0.85"/>
+  <line x1="152" y1="144" x2="152" y2="156" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <line x1="158" y1="146" x2="158" y2="158" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+  <line x1="164" y1="144" x2="164" y2="156" stroke="#fbbf24" stroke-width="3" stroke-linecap="round"/>
+</svg>

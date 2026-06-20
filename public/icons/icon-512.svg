@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000040"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bg)"/>
+  <!-- Mortarboard flat top -->
+  <polygon points="256,110 420,190 256,270 92,190" fill="white" opacity="0.95" filter="url(#shadow)"/>
+  <!-- Mortarboard body -->
+  <path d="M158 210 L158 338 Q158 355 172 364 Q256 395 340 364 Q354 355 354 338 L354 210 L256 250 Z" fill="white" opacity="0.9" filter="url(#shadow)"/>
+  <!-- Tassel cord -->
+  <circle cx="420" cy="190" r="14" fill="#fbbf24"/>
+  <line x1="420" y1="204" x2="420" y2="345" stroke="#fbbf24" stroke-width="10" stroke-linecap="round"/>
+  <!-- Tassel end knot -->
+  <circle cx="420" cy="358" r="26" fill="#fbbf24" opacity="0.9"/>
+  <!-- Tassel fringe -->
+  <line x1="404" y1="380" x2="397" y2="415" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <line x1="420" y1="384" x2="420" y2="420" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+  <line x1="436" y1="380" x2="443" y2="415" stroke="#fbbf24" stroke-width="7" stroke-linecap="round"/>
+</svg>
