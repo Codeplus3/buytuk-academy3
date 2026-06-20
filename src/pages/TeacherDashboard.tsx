@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
-import { UserAvatar } from "../components/UserAvatar";
-import { GlobalSocialLinks } from "../components/GlobalSocialLinks";
+import { UserAvatar } from "@/contexts/components/UserAvatar";
+import { GlobalSocialLinks } from "@/contexts/components/GlobalSocialLinks";
 import {
   getStudents, getExamRecords, saveExamRecords,
   getSubjectsForTeacher, getSubjects, saveSubjects,
@@ -9,25 +9,25 @@ import {
   DIFFICULTY_LABELS, DIFFICULTY_COLORS,
 } from "../lib/db";
 import type { Teacher, Subject, Question, Exam } from "../lib/db";
-import { ProfileSettingsPanel } from "../components/ProfileSettingsPanel";
-import { VideoEmbedModal } from "../components/VideoEmbedModal";
-import { toast } from "../components/Toast";
+import { ProfileSettingsPanel } from "@/contexts/components/ProfileSettingsPanel";
+import { VideoEmbedModal } from "@/contexts/components/VideoEmbedModal";
+import { toast } from "@/contexts/components/Toast";
 import { syncEngine } from "../lib/sync-engine";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
-import { SubjectVideoUpload } from "../components/SubjectVideoUpload";
-import { ExamManagementPanel } from "../components/ExamManagementPanel";
-import type { ExamFormState } from "../components/ExamManagementPanel";
-import { TeacherHomeworkPanel } from "../components/TeacherHomeworkPanel";
-import { TeacherStatsPanel } from "../components/TeacherStatsPanel";
-import { AnnouncementBanner } from "../components/AnnouncementBanner";
-import { LiveSessionPanel } from "../components/LiveSessionPanel";
-import { AttendancePanel } from "../components/AttendancePanel";
-import { DirectMessagePanel } from "../components/DirectMessagePanel";
-import { TimetablePanel } from "../components/TimetablePanel";
-import { TeacherRatingPanel } from "../components/TeacherRatingPanel";
-import { AudioLessonUploadPanel } from "../components/AudioLessonUploadPanel";
-import { AIQuestionGenerator } from "../components/AIQuestionGenerator";
-import { ChapterQATeacherPanel } from "../components/ChapterQAPanel";
+import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
+import { SubjectVideoUpload } from "@/contexts/components/SubjectVideoUpload";
+import { ExamManagementPanel } from "@/contexts/components/ExamManagementPanel";
+import type { ExamFormState } from "@/contexts/components/ExamManagementPanel";
+import { TeacherHomeworkPanel } from "@/contexts/components/TeacherHomeworkPanel";
+import { TeacherStatsPanel } from "@/contexts/components/TeacherStatsPanel";
+import { AnnouncementBanner } from "@/contexts/components/AnnouncementBanner";
+import { LiveSessionPanel } from "@/contexts/components/LiveSessionPanel";
+import { AttendancePanel } from "@/contexts/components/AttendancePanel";
+import { DirectMessagePanel } from "@/contexts/components/DirectMessagePanel";
+import { TimetablePanel } from "@/contexts/components/TimetablePanel";
+import { TeacherRatingPanel } from "@/contexts/components/TeacherRatingPanel";
+import { AudioLessonUploadPanel } from "@/contexts/components/AudioLessonUploadPanel";
+import { AIQuestionGenerator } from "@/contexts/components/AIQuestionGenerator";
+import { ChapterQATeacherPanel } from "@/contexts/components/ChapterQAPanel";
 
 type Tab = "home" | "subjects" | "questions" | "exams" | "grades" | "profile" | "homework" | "stats" | "sessions" | "attendance" | "dm" | "timetable" | "rating" | "audio" | "ai" | "chapterqa";
 
@@ -838,3 +838,4 @@ export function TeacherDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+

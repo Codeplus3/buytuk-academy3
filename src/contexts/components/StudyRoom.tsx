@@ -33,7 +33,7 @@ import type { TutorMessage }
 import type { AITutor }
   from "../lib/offline-media-engine/ai-tutor";
 import { useLanguage }
-  from "../contexts/LanguageContext";
+  from "@/contexts/LanguageContext";
 import { extractFramesAndEmbeddings }
   from "../lib/video-analyzer";
 import type { VideoAnalysisProgress }

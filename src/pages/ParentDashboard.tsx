@@ -9,8 +9,8 @@ import {
   getChapterProgress, getHomeworkForStudent, getHomeworkSubmissions,
   getAttendanceForStudent, computeStudentPoints, computeStudentBadges,
 } from "../lib/db";
-import { printProgressReport } from "../components/ProgressReportPDF";
-import { UserAvatar } from "../components/UserAvatar";
+import { printProgressReport } from "@/contexts/components/ProgressReportPDF";
+import { UserAvatar } from "@/contexts/components/UserAvatar";
 
 interface Props { user: Parent; onLogout: () => void; }
 
@@ -368,3 +368,4 @@ export function ParentDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+

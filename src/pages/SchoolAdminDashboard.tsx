@@ -1,15 +1,15 @@
 import { useState, useEffect, useMemo } from "react";
 import { sha256, avatarUrl } from "../lib/auth";
-import { UserAvatar } from "../components/UserAvatar";
-import { AvatarUploadWidget, getPhoto } from "../components/AvatarUploadWidget";
+import { UserAvatar } from "@/contexts/components/UserAvatar";
+import { AvatarUploadWidget, getPhoto } from "@/contexts/components/AvatarUploadWidget";
 import {
   getStudents, getTeachers, getSAdmins, saveTeachers, SCHOOL_NAMES,
   getLiveSessions, getAttendance, getHomework, getHomeworkSubmissions,
   getExamRecords, getAnnouncements,
 } from "../lib/db";
 import type { SchoolAdmin, Teacher } from "../lib/db";
-import { toast } from "../components/Toast";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { toast } from "@/contexts/components/Toast";
+import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
 
 type Tab = "home" | "teachers" | "students" | "specs" | "attendance" | "sessions" | "homework" | "reports" | "profile";
 
@@ -597,3 +597,4 @@ export function SchoolAdminDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+

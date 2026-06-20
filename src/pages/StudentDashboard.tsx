@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from "react";
-import { UserAvatar } from "../components/UserAvatar";
-import { GlobalSocialLinks } from "../components/GlobalSocialLinks";
-import { QuizEngine } from "../components/QuizEngine";
+import { UserAvatar } from "@/contexts/components/UserAvatar";
+import { GlobalSocialLinks } from "@/contexts/components/GlobalSocialLinks";
+import { QuizEngine } from "@/contexts/components/QuizEngine";
 import {
   getExamRecords, saveExamRecords,
   getSubjectsForStudent, getPublishedExamsForStudent, getQuestions,
@@ -15,30 +15,30 @@ import {
 import { syncEngine } from "../lib/sync-engine";
 import { downloadAndInstallBundle, getBundleInstallInfo, type BundleProgress } from "../lib/bundle-manager";
 import type { Student, Subject, ExamRecord, AcademicStage, AcademicTrack, Exam, Question, Message, EmbedVideo } from "../lib/db";
-import { toast } from "../components/Toast";
-import { StudyRoom } from "../components/StudyRoom";
-import { OfflineMediaPanel } from "../components/OfflineMediaPanel";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
-import { LessonLibrary } from "../components/LessonLibrary";
-import { PerformanceChart } from "../components/PerformanceChart";
-import { GamificationPanel } from "../components/GamificationPanel";
-import { ExamCalendar } from "../components/ExamCalendar";
-import { HomeworkPanel } from "../components/HomeworkPanel";
-import { AnnouncementBanner } from "../components/AnnouncementBanner";
-import { NotificationCenter } from "../components/NotificationCenter";
-import { GlobalSearch } from "../components/GlobalSearch";
-import { CertificateModal } from "../components/CertificateModal";
-import { LiveSessionViewer } from "../components/LiveSessionViewer";
-import { StudentAttendanceView } from "../components/StudentAttendanceView";
-import { PeerReviewPanel } from "../components/PeerReviewPanel";
-import { DirectMessagePanel } from "../components/DirectMessagePanel";
-import { Leaderboard } from "../components/Leaderboard";
-import { StudyNotesPanel } from "../components/StudyNotesPanel";
-import { TimetablePanel } from "../components/TimetablePanel";
-import { TeacherRatingPanel } from "../components/TeacherRatingPanel";
-import { ProgressReportButton } from "../components/ProgressReportPDF";
-import { StudentTicketsPanel } from "../components/StudentTicketsPanel";
-import { Storefront } from "../components/Storefront";
+import { toast } from "@/contexts/components/Toast";
+import { StudyRoom } from "@/contexts/components/StudyRoom";
+import { OfflineMediaPanel } from "@/contexts/components/OfflineMediaPanel";
+import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
+import { LessonLibrary } from "@/contexts/components/LessonLibrary";
+import { PerformanceChart } from "@/contexts/components/PerformanceChart";
+import { GamificationPanel } from "@/contexts/components/GamificationPanel";
+import { ExamCalendar } from "@/contexts/components/ExamCalendar";
+import { HomeworkPanel } from "@/contexts/components/HomeworkPanel";
+import { AnnouncementBanner } from "@/contexts/components/AnnouncementBanner";
+import { NotificationCenter } from "@/contexts/components/NotificationCenter";
+import { GlobalSearch } from "@/contexts/components/GlobalSearch";
+import { CertificateModal } from "@/contexts/components/CertificateModal";
+import { LiveSessionViewer } from "@/contexts/components/LiveSessionViewer";
+import { StudentAttendanceView } from "@/contexts/components/StudentAttendanceView";
+import { PeerReviewPanel } from "@/contexts/components/PeerReviewPanel";
+import { DirectMessagePanel } from "@/contexts/components/DirectMessagePanel";
+import { Leaderboard } from "@/contexts/components/Leaderboard";
+import { StudyNotesPanel } from "@/contexts/components/StudyNotesPanel";
+import { TimetablePanel } from "@/contexts/components/TimetablePanel";
+import { TeacherRatingPanel } from "@/contexts/components/TeacherRatingPanel";
+import { ProgressReportButton } from "@/contexts/components/ProgressReportPDF";
+import { StudentTicketsPanel } from "@/contexts/components/StudentTicketsPanel";
+import { Storefront } from "@/contexts/components/Storefront";
 import { getAttendanceForStudent } from "../lib/db";
 
 type Tab = "home" | "sections" | "exams" | "grades" | "media" | "profile" | "practice" | "messages" | "performance" | "calendar" | "gamification" | "homework" | "sessions" | "attendance" | "peerreview" | "leaderboard" | "notes" | "timetable" | "rating" | "tickets" | "store";
@@ -1163,3 +1163,4 @@ export function StudentDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+

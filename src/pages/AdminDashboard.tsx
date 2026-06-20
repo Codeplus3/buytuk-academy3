@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { sha256, avatarUrl } from "../lib/auth";
-import { UserAvatar } from "../components/UserAvatar";
-import { AvatarUploadWidget, getPhoto } from "../components/AvatarUploadWidget";
+import { UserAvatar } from "@/contexts/components/UserAvatar";
+import { AvatarUploadWidget, getPhoto } from "@/contexts/components/AvatarUploadWidget";
 import {
   getStudents, getTeachers, getSAdmins, saveTeachers, saveSAdmins, saveStudents,
   getExamRecords, getSchools, saveSchools, getSchoolNames,
@@ -15,23 +15,23 @@ import {
   getOrderRequests,
 } from "../lib/db";
 import type { Teacher, SchoolAdmin, School, SchoolType, Subject, AcademicStage, AcademicTrack, RecoveryRequest, SubscriptionPlan, Parent } from "../lib/db";
-import { toast } from "../components/Toast";
+import { toast } from "@/contexts/components/Toast";
 import { syncEngine } from "../lib/sync-engine";
-import { OfflineMediaPanel } from "../components/OfflineMediaPanel";
-import { LessonManager } from "../components/LessonManager";
+import { OfflineMediaPanel } from "@/contexts/components/OfflineMediaPanel";
+import { LessonManager } from "@/contexts/components/LessonManager";
 import { ResumableUploader } from "../lib/resumable-upload";
 import type { UploadProgressEvent } from "../lib/resumable-upload";
 import { getAuditLogs, clearAuditLogs, addAuditLog } from "../lib/security";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
 import type { AuditLog } from "../lib/security";
-import { AdminSettingsPanel } from "../components/AdminSettingsPanel";
-import { MessageCenter } from "../components/MessageCenter";
-import { AdminAnnouncementsPanel } from "../components/AdminAnnouncementsPanel";
-import { AnnouncementBanner } from "../components/AnnouncementBanner";
-import { ParentAdminPanel } from "../components/ParentAdminPanel";
-import { SupportAdminPanel } from "../components/SupportAdminPanel";
-import { OrdersAdminPanel } from "../components/OrdersAdminPanel";
-import { PremiumSubjectsPanel } from "../components/PremiumSubjectsPanel";
+import { AdminSettingsPanel } from "@/contexts/components/AdminSettingsPanel";
+import { MessageCenter } from "@/contexts/components/MessageCenter";
+import { AdminAnnouncementsPanel } from "@/contexts/components/AdminAnnouncementsPanel";
+import { AnnouncementBanner } from "@/contexts/components/AnnouncementBanner";
+import { ParentAdminPanel } from "@/contexts/components/ParentAdminPanel";
+import { SupportAdminPanel } from "@/contexts/components/SupportAdminPanel";
+import { OrdersAdminPanel } from "@/contexts/components/OrdersAdminPanel";
+import { PremiumSubjectsPanel } from "@/contexts/components/PremiumSubjectsPanel";
 
 type Tab = "home" | "schools" | "sadmins" | "teachers" | "students" | "parents" | "support" | "subjects" | "orders" | "premium" | "subscriptions" | "recovery" | "security" | "diagnostics" | "profile" | "settings" | "messages" | "announcements";
 
@@ -1862,3 +1862,4 @@ export function AdminDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+

@@ -7,7 +7,7 @@
  * ─────────────────────────────────────────────────────────────────────────── */
 
 import { useState, useEffect, useRef } from "react";
-import { useLanguage } from "../contexts/LanguageContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 /* Inject keyframes once into <head> */
 const STYLE_ID = "buytuk-lang-switcher-styles";

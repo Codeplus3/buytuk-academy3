@@ -24,10 +24,10 @@ import {
   addAuditLog, LOCKOUT_MS,
 } from "../lib/security";
 import type { Student, Teacher, SchoolAdmin, AcademicStage, AcademicTrack, Parent } from "../lib/db";
-import { toast } from "../components/Toast";
+import { toast } from "@/contexts/components/Toast";
 import { syncEngine } from "../lib/sync-engine";
-import { ParticleBackground } from "../components/ParticleBackground";
-import { LanguageSwitcher } from "../components/LanguageSwitcher";
+import { ParticleBackground } from "@/contexts/components/ParticleBackground";
+import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
 import { useLanguage } from "../contexts/LanguageContext";
 
 type Role     = "admin" | "school-admin" | "teacher" | "student" | "parent" | "support";
@@ -610,3 +610,4 @@ export function AuthScreen({ onLogin }: Props) {
     </div>
   );
 }
+

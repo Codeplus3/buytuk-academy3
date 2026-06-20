@@ -6,7 +6,7 @@ import {
   getTicketRatings, getRepliesForTicket, getRatingForTicket,
 } from "../lib/db";
 import type { SupportAgent, SupportTicket, TicketReply } from "../lib/db";
-import { toast } from "../components/Toast";
+import { toast } from "@/contexts/components/Toast";
 
 interface Props {
   user: SupportAgent;
@@ -338,3 +338,4 @@ export function SupportDashboard({ user, onLogout }: Props) {
     </div>
   );
 }
+
