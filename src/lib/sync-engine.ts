@@ -399,12 +399,19 @@ export class HybridSyncEngine {
    */
   async subscriptionSync(studentEmail: string): Promise<boolean> {
     if (!this._online || !studentEmail) return false;
+    const url = `${SYNC_BASE}/subscription/${encodeURIComponent(studentEmail)}`;
     try {
-      const res = await fetch(
-        `${SYNC_BASE}/subscription/${encodeURIComponent(studentEmail)}`,
-        { signal: this._timeout(FETCH_TIMEOUT) },
-      );
-      if (!res.ok) return false;
+      const res = await fetch(url, { signal: this._timeout(FETCH_TIMEOUT) });
+      if (res.status === 404) {
+        console.warn("Subscription sync endpoint not found:", url);
+        return false;
+      }
+      if (!res.ok) {
+        const body = await res.text().catch(() => "<unable to read body>");
+        console.warn("Subscription sync failed:", res.status, body);
+        return false;
+      }
+
       const data = await res.json() as {
         serverKnown:        boolean;
         subscriptionStatus: "active" | "expired" | "none";
@@ -437,7 +444,8 @@ export class HybridSyncEngine {
         detail: { source: "subscription-sync" },
       }));
       return true;
-    } catch {
+    } catch (error) {
+      console.warn("Subscription sync error:", error);
       return false;
     }
   }

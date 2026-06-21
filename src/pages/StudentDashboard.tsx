@@ -19,6 +19,7 @@ import { toast } from "@/contexts/components/Toast";
 import { StudyRoom } from "@/contexts/components/StudyRoom";
 import { OfflineMediaPanel } from "@/contexts/components/OfflineMediaPanel";
 import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
+import { PageTransition } from "@/components/layout/PageTransition";
 import { LessonLibrary } from "@/contexts/components/LessonLibrary";
 import { PerformanceChart } from "@/contexts/components/PerformanceChart";
 import { GamificationPanel } from "@/contexts/components/GamificationPanel";
@@ -355,7 +356,9 @@ export function StudentDashboard({ user, onLogout }: Props) {
   useEffect(() => {
     syncEngine.subscriptionSync(user.email).then(updated => {
       if (updated) setRefreshTick(t => t + 1);
-    }).catch(() => { /* offline — fine, local data is used */ });
+    }).catch(error => {
+      console.warn("subscriptionSync failed, using local data", error);
+    });
   }, [user.email]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Listen for admin asset uploads → re-derive subjects & exams instantly
@@ -555,8 +558,9 @@ export function StudentDashboard({ user, onLogout }: Props) {
   }
 
   return (
-    <div>
-      <nav className="main-nav">
+    <PageTransition>
+      <div>
+        <nav className="main-nav">
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
           <span style={{ fontSize: 28 }}>🎓</span>
           <span style={{ fontSize: 15, fontWeight: 800, background: "linear-gradient(135deg, var(--primary), var(--secondary))", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>بوابة الطالب</span>
@@ -1185,6 +1189,7 @@ export function StudentDashboard({ user, onLogout }: Props) {
         />
       )}
     </div>
+    </PageTransition>
   );
 }
 
