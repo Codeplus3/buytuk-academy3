@@ -127,6 +127,7 @@ export class OfflineMediaEngine {
     /* Step 1 — Resize frame */
     let processedFrame = imageBase64;
     try {
+      // @ts-ignore
       processedFrame = await LocalVisionEngine.resizeFrame(imageBase64, 1344);
     } catch { /* non-fatal — use original */ }
 
