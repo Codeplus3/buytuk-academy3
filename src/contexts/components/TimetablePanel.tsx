@@ -18,7 +18,11 @@ const HOUR_SLOTS = Array.from({ length: 9 }, (_, i) => {
 });
 
 const COLORS = ["#6c63ff","#10b981","#f59e0b","#ef4444","#3b82f6","#8b5cf6","#ec4899","#14b8a6"];
-const subjectColor = (subjectId: string) => COLORS[Math.abs(subjectId.split("").reduce((a, c) => a + c.charCodeAt(0), 0)) % COLORS.length];
+const subjectColor = (subjectId: string) => {
+  const safeId = subjectId || "";
+  const hash = Math.abs(safeId.split("").reduce((a, c) => a + (c ? c.charCodeAt(0) : 0), 0));
+  return COLORS[hash % COLORS.length];
+};
 
 /* ─── Teacher view ──────────────────────────────────────────────────────────── */
 interface TeacherProps { role: "teacher"; teacher: Teacher; mySubjects: Subject[]; card: React.CSSProperties; }

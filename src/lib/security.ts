@@ -207,7 +207,7 @@ async function _getHmacKey(): Promise<CryptoKey> {
   const stored = sessionStorage.getItem(SS_KEY);
 
   if (stored) {
-    const raw = Uint8Array.from(atob(stored), c => c.charCodeAt(0)).buffer;
+    const raw = Uint8Array.from(atob(stored), c => c ? c.charCodeAt(0) : 0).buffer;
     return crypto.subtle.importKey(
       "raw", raw,
       { name: "HMAC", hash: "SHA-256" },

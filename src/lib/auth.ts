@@ -9,6 +9,7 @@ export async function sha256(str: string): Promise<string> {
 export function avatarUrl(name: string): string {
   const encoded = encodeURIComponent(name.trim().replace(/\s+/g, " "));
   const colors = ["6c63ff", "f093fb", "00c896", "54a0ff", "ffa502", "ff4757"];
-  const color = colors[name.charCodeAt(0) % colors.length];
+  const index = name?.charCodeAt(0) ?? 0;
+  const color = colors[index % colors.length];
   return `https://ui-avatars.com/api/?name=${encoded}&background=${color}&color=fff&size=80`;
 }

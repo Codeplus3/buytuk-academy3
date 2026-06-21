@@ -14,7 +14,8 @@ import { useState } from "react";
 /* ── colour palette (matches auth.ts avatarUrl) ─────────────────── */
 const COLOURS = ["#6c63ff", "#f093fb", "#00c896", "#54a0ff", "#ffa502", "#ff4757"];
 function colourFor(name: string): string {
-  return COLOURS[name.charCodeAt(0) % COLOURS.length] ?? "#6c63ff";
+  const index = name?.charCodeAt(0) ?? 0;
+  return COLOURS[index % COLOURS.length] ?? "#6c63ff";
 }
 function initial(name: string): string {
   return name.trim().charAt(0).toUpperCase();

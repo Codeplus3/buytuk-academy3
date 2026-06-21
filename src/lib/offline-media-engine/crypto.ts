@@ -52,8 +52,8 @@ export async function encrypt(plaintext: string, key: CryptoKey, keyId: string):
 
 /** Decrypt EncryptedBlob → plaintext */
 export async function decrypt(blob: EncryptedBlob, key: CryptoKey): Promise<string> {
-  const iv   = Uint8Array.from(atob(blob.iv),   c => c.charCodeAt(0));
-  const data = Uint8Array.from(atob(blob.data), c => c.charCodeAt(0));
+  const iv   = Uint8Array.from(atob(blob.iv),   c => c ? c.charCodeAt(0) : 0);
+  const data = Uint8Array.from(atob(blob.data), c => c ? c.charCodeAt(0) : 0);
   const buf  = await subtle.decrypt({ name: "AES-GCM", iv }, key, data);
   return new TextDecoder().decode(buf);
 }
