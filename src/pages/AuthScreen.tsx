@@ -25,6 +25,7 @@ import {
 } from "../lib/security";
 import type { Student, Teacher, SchoolAdmin, AcademicStage, AcademicTrack, Parent } from "../lib/db";
 import { toast } from "@/contexts/components/Toast";
+import { Toaster, toast as hotToast } from "react-hot-toast";
 import { syncEngine } from "../lib/sync-engine";
 import { ParticleBackground } from "@/contexts/components/ParticleBackground";
 import { LanguageSwitcher } from "@/contexts/components/LanguageSwitcher";
@@ -241,7 +242,6 @@ export function AuthScreen({ onLogin }: Props) {
   /* ── Student Self-Registration ─────────────────────────────────────────── */
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("هل وصل الكود لهذا السطر؟");
     setRegErr("");
     if (!regName || regName.trim().length < 3)                    { setRegErr(t("auth.errors.nameTooShort"));    return; }
     if (!regEmail || !/^[^@]+@[^@]+\.[^@]+$/.test(regEmail))     { setRegErr(t("auth.errors.invalidEmail"));    return; }
@@ -255,7 +255,7 @@ export function AuthScreen({ onLogin }: Props) {
     }
 
     setLoading(true);
-    alert("جاري المحاولة...");
+    const loadingToast = hotToast.loading("جاري إنشاء حسابك...");
     console.log("1. محاولة التسجيل...");
     const { data, error } = await supabase.auth.signUp({
       email: regEmail.toLowerCase(),
@@ -264,6 +264,7 @@ export function AuthScreen({ onLogin }: Props) {
 
     if (error) {
       setLoading(false);
+      hotToast.error("حدث خطأ: " + (error.message ?? t("auth.errors.registerFailed")), { id: loadingToast });
       setRegErr(error.message || t("auth.errors.registerFailed"));
       console.error("❌ خطأ في التسجيل:", error.message);
       return;
@@ -281,6 +282,19 @@ export function AuthScreen({ onLogin }: Props) {
         console.error("❌ خطأ في إضافة البروفايل:", profileError.message);
       } else {
         console.log("✅ تمت إضافة البيانات بنجاح إلى جدول profiles!");
+      }
+
+      const { data: userProfile, error: profileQueryError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', data.user.id)
+        .single();
+
+      if (profileQueryError) {
+        console.error("خطأ في قراءة البروفايل:", profileQueryError.message);
+        alert("خطأ في قراءة البروفايل: " + profileQueryError.message);
+      } else {
+        console.log("تم جلب البروفايل بنجاح:", userProfile);
       }
     }
 
@@ -311,7 +325,7 @@ export function AuthScreen({ onLogin }: Props) {
     void syncEngine.pushStudent(student);
 
     setLoading(false);
-    toast(t("auth.errors.registerSuccess"), "success");
+    hotToast.success("تم التسجيل بنجاح! جاري تحويلك...", { id: loadingToast });
     setAuthMode("login");
     setLoginEmail(student.email);
   };
@@ -328,6 +342,7 @@ export function AuthScreen({ onLogin }: Props) {
       minHeight: "100vh", padding: 20, position: "relative", zIndex: 1,
     }}>
       <ParticleBackground />
+      <Toaster position="top-center" />
       <div className="auth-wrapper">
 
         {/* ── Brand panel ───────────────────────────────────────────────── */}
