@@ -241,6 +241,7 @@ export function AuthScreen({ onLogin }: Props) {
   /* ── Student Self-Registration ─────────────────────────────────────────── */
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    alert("هل وصل الكود لهذا السطر؟");
     setRegErr("");
     if (!regName || regName.trim().length < 3)                    { setRegErr(t("auth.errors.nameTooShort"));    return; }
     if (!regEmail || !/^[^@]+@[^@]+\.[^@]+$/.test(regEmail))     { setRegErr(t("auth.errors.invalidEmail"));    return; }

@@ -30,8 +30,9 @@ export default function App() {
   const [idleWarnSec, setIdleWarnSec] = useState(0); // > 0 shows warning overlay
 
   useEffect(() => {
-    syncEngine.start(30_000);
-    return () => syncEngine.stop();
+    // Disable automatic sync engine startup to avoid missing /api/sync routes in this deployment.
+    // syncEngine.start(30_000);
+    // return () => syncEngine.stop();
   }, []);
 
   const handleLogin = (role: Role, user: User) => {
