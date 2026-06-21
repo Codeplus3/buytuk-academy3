@@ -4,7 +4,7 @@ import { syncEngine } from "./lib/sync-engine";
 import { sessionManager } from "./lib/session-manager";
 import { addAuditLog } from "./lib/security";
 import { LanguageProvider } from "./contexts/LanguageContext";
-import { NotificationProvider } from "./contexts/NotificationProvider";
+import { NotificationProvider } from "@/contexts/NotificationProvider";
 import { ToastContainer } from "@/contexts/components/Toast";
 import { InstallPrompt } from "@/contexts/components/InstallPrompt";
 import { AuthScreen } from "./pages/AuthScreen";
