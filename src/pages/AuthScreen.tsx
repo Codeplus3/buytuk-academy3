@@ -203,7 +203,8 @@ export function AuthScreen({ onLogin }: Props) {
       });
 
       if (error) {
-        alert("بيانات الدخول غير صحيحة. راجع الإدارة.");
+        console.error("Supabase Error:", error);
+        alert("خطأ Supabase: " + error.message);
         return;
       }
 
