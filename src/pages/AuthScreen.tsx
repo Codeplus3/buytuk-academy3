@@ -284,8 +284,12 @@ export function AuthScreen({ onLogin }: Props) {
         .from('profiles')
         .upsert(
           { id: data.user.id, email: regEmail.toLowerCase(), full_name: regName.trim() },
-          { onConflict: 'id' },
+          { onConflict: 'id' }
         );
+
+      if (profileError) {
+        console.error("خطأ في إضافة البروفايل:", profileError.message);
+        hotToast.error("حدث خطأ أثناء حفظ بيانات الحساب. الرجاء المحاولة لاحقاً.", { id: loadingToast });
       } else {
         console.log("✅ تمت إضافة البيانات بنجاح إلى جدول profiles!");
       }
@@ -305,7 +309,9 @@ export function AuthScreen({ onLogin }: Props) {
     }
 
     await new Promise(r => setTimeout(r, 600));
-    const hashed: string = await sha256(regPassword);
+    const hashed: string = typeof sha256 === "function"
+      ? await sha256(regPassword)
+      : regPassword;
     const student: Student = {
       id:         Date.now(),
       name:       regName.trim(),

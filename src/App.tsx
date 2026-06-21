@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
 import { syncEngine } from "./lib/sync-engine";
 import { sessionManager } from "./lib/session-manager";
 import { addAuditLog } from "./lib/security";
 import { LanguageProvider } from "./contexts/LanguageContext";
+import { NotificationProvider } from "./contexts/NotificationProvider";
 import { ToastContainer } from "@/contexts/components/Toast";
 import { InstallPrompt } from "@/contexts/components/InstallPrompt";
 import { AuthScreen } from "./pages/AuthScreen";
@@ -12,6 +14,7 @@ import { TeacherDashboard } from "./pages/TeacherDashboard";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import { ParentDashboard } from "./pages/ParentDashboard";
 import { SupportDashboard } from "./pages/SupportDashboard";
+import { PageTransition } from "./components/layout/PageTransition";
 import type { Student, Teacher, SchoolAdmin, Parent, SupportAgent } from "./lib/db";
 
 type Role     = "admin" | "school-admin" | "teacher" | "student" | "parent" | "support";
@@ -68,43 +71,48 @@ export default function App() {
 
   return (
     <LanguageProvider>
-      {/* PWA install button — always visible regardless of login state */}
-      <InstallPrompt />
+      <NotificationProvider>
+        {/* PWA install button — always visible regardless of login state */}
+        <InstallPrompt />
 
-      {!session ? (
-        <>
-          <AuthScreen onLogin={handleLogin as Parameters<typeof AuthScreen>[0]["onLogin"]} />
-          <ToastContainer />
-        </>
-      ) : (
-        <>
-          {session.role === "admin" && (
-            <AdminDashboard user={session.user as AdminUser} onLogout={handleLogout} />
+        <AnimatePresence mode="wait">
+          {!session ? (
+            <PageTransition>
+              <AuthScreen onLogin={handleLogin as Parameters<typeof AuthScreen>[0]["onLogin"]} />
+            </PageTransition>
+          ) : (
+            <PageTransition>
+              {session.role === "admin" && (
+                <AdminDashboard user={session.user as AdminUser} onLogout={handleLogout} />
+              )}
+              {session.role === "school-admin" && (
+                <SchoolAdminDashboard user={session.user as SchoolAdmin} onLogout={handleLogout} />
+              )}
+              {session.role === "teacher" && (
+                <TeacherDashboard user={session.user as Teacher} onLogout={handleLogout} />
+              )}
+              {session.role === "student" && (
+                <StudentDashboard user={session.user as Student} onLogout={handleLogout} />
+              )}
+              {session.role === "parent" && (
+                <ParentDashboard user={session.user as Parent} onLogout={handleLogout} />
+              )}
+              {session.role === "support" && (
+                <SupportDashboard user={session.user as SupportAgent} onLogout={handleLogout} />
+              )}
+            </PageTransition>
           )}
-          {session.role === "school-admin" && (
-            <SchoolAdminDashboard user={session.user as SchoolAdmin} onLogout={handleLogout} />
-          )}
-          {session.role === "teacher" && (
-            <TeacherDashboard user={session.user as Teacher} onLogout={handleLogout} />
-          )}
-          {session.role === "student" && (
-            <StudentDashboard user={session.user as Student} onLogout={handleLogout} />
-          )}
-          {session.role === "parent" && (
-            <ParentDashboard user={session.user as Parent} onLogout={handleLogout} />
-          )}
-          {session.role === "support" && (
-            <SupportDashboard user={session.user as SupportAgent} onLogout={handleLogout} />
-          )}
-          <ToastContainer />
+        </AnimatePresence>
 
-          {/* ── Idle Session Warning Overlay ── */}
-          {idleWarnSec > 0 && (
-            <div style={{
-              position: "fixed", inset: 0, zIndex: 9999,
-              background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)",
-              display: "flex", alignItems: "center", justifyContent: "center",
-            }}>
+        <ToastContainer />
+
+        {/* ── Idle Session Warning Overlay ── */}
+        {idleWarnSec > 0 && (
+          <div style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            background: "rgba(0,0,0,0.75)", backdropFilter: "blur(4px)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
               <div style={{
                 background: "var(--card)", border: "1px solid var(--glass-border)",
                 borderRadius: "var(--radius)", padding: "36px 40px",
@@ -144,8 +152,7 @@ export default function App() {
               </div>
             </div>
           )}
-        </>
-      )}
+      </NotificationProvider>
     </LanguageProvider>
   );
 }
