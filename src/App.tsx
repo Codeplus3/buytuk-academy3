@@ -14,7 +14,7 @@ import { TeacherDashboard } from "./pages/TeacherDashboard";
 import { StudentDashboard } from "./pages/StudentDashboard";
 import { ParentDashboard } from "./pages/ParentDashboard";
 import { SupportDashboard } from "./pages/SupportDashboard";
-import { PageTransition } from "./components/layout/PageTransition";
+import { PageTransition } from "@/components/layout/PageTransition";
 import type { Student, Teacher, SchoolAdmin, Parent, SupportAgent } from "./lib/db";
 
 type Role     = "admin" | "school-admin" | "teacher" | "student" | "parent" | "support";
