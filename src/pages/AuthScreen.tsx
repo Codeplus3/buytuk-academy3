@@ -197,53 +197,33 @@ export function AuthScreen({ onLogin }: Props) {
       const cleanEmail = loginEmail.trim().toLowerCase();
       const cleanPassword = loginPassword.trim();
 
-      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: cleanEmail,
         password: cleanPassword,
       });
 
-      if (signInError) {
-        console.error("خطأ Supabase:", signInError);
-        alert("الخطأ الحقيقي: " + signInError.message);
-        throw signInError;
+      if (error) {
+        alert("بيانات الدخول غير صحيحة. راجع الإدارة.");
+        return;
       }
 
-      console.log("تم الدخول بنجاح:", signInData);
-
-      const { data: userProfile, error: profileError } = await supabase
+      const { data: profile, error: profileError } = await supabase
         .from('profiles')
-        .select('*')
-        .eq('id', signInData.user?.id)
+        .select('role, full_name')
+        .eq('id', data.user?.id)
         .single();
 
       if (profileError) {
-        console.error("خطأ في قراءة البروفايل:", profileError.message);
-        alert("خطأ في قراءة البروفايل: " + profileError.message);
-      } else {
-        console.log("تم جلب البروفايل بنجاح:", userProfile);
-      }
-
-      if (cleanEmail === "ahmed@buytuk.com") {
-        clearFailedAttempts(cleanEmail);
-        onLogin("admin", { name: "Ahmed", email: cleanEmail });
+        alert("خطأ في جلب بيانات المستخدم.");
         return;
       }
-      const sAdmin = getSAdmins().find(u => u.email.toLowerCase() === cleanEmail);
-      if (sAdmin)  { clearFailedAttempts(cleanEmail); onLogin("school-admin", sAdmin);  return; }
-      const teacher = getTeachers().find(u => u.email.toLowerCase() === cleanEmail);
-      if (teacher)  { clearFailedAttempts(cleanEmail); onLogin("teacher", teacher);      return; }
-      const student = getStudents().find(u => u.email.toLowerCase() === cleanEmail);
-      if (student)  { clearFailedAttempts(cleanEmail); onLogin("student", student);      return; }
-      const parent  = getParents().find(u => u.email.toLowerCase() === cleanEmail && u.status === "active");
-      if (parent)   { clearFailedAttempts(cleanEmail); onLogin("parent", parent);        return; }
-      const support = getSupportAgents().find(u => u.email.toLowerCase() === cleanEmail && u.status === "active");
-      if (support)  { clearFailedAttempts(cleanEmail); onLogin("support", support as Parameters<typeof onLogin>[1]); return; }
 
-      clearFailedAttempts(cleanEmail);
-      onLogin("student", { name: userProfile?.full_name ?? cleanEmail, email: cleanEmail });
-      return;
-    } catch {
-      /* Record failed attempt + check if now locked */
+      if (profile.role === 'admin') {
+        onLogin("admin", { name: profile.full_name, email: cleanEmail });
+      } else {
+        onLogin("student", { name: profile.full_name, email: cleanEmail });
+      }
+    } catch (err) {
       const result = recordFailedAttempt(loginEmail.trim().toLowerCase());
       addAuditLog({
         email:   loginEmail.trim().toLowerCase(),
