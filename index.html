@@ -9,5 +9,18 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx?v=2"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+              console.log('Service Worker registered:', registration.scope);
+            })
+            .catch((error) => {
+              console.error('Service Worker registration failed:', error);
+            });
+        });
+      }
+    </script>
   </body>
 </html>
