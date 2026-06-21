@@ -254,6 +254,8 @@ export function AuthScreen({ onLogin }: Props) {
     }
 
     setLoading(true);
+    alert("جاري المحاولة...");
+    console.log("1. محاولة التسجيل...");
     const { data, error } = await supabase.auth.signUp({
       email: regEmail.toLowerCase(),
       password: regPassword,
@@ -262,10 +264,11 @@ export function AuthScreen({ onLogin }: Props) {
     if (error) {
       setLoading(false);
       setRegErr(error.message || t("auth.errors.registerFailed"));
-      console.error("خطأ في التسجيل:", error.message);
+      console.error("❌ خطأ في التسجيل:", error.message);
       return;
     }
 
+    console.log("2. نجح التسجيل، محاولة إضافة البروفايل...");
     if (data?.user) {
       const { error: profileError } = await supabase
         .from('profiles')
@@ -274,9 +277,9 @@ export function AuthScreen({ onLogin }: Props) {
         ]);
 
       if (profileError) {
-        console.error("خطأ في إنشاء البروفايل:", profileError.message);
+        console.error("❌ خطأ في إضافة البروفايل:", profileError.message);
       } else {
-        console.log("✅ تم تسجيل الطالب وإنشاء بروفايل له بنجاح!");
+        console.log("✅ تمت إضافة البيانات بنجاح إلى جدول profiles!");
       }
     }
 
