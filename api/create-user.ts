@@ -34,14 +34,16 @@ export default async function handler(req: any, res: any) {
       return res.status(500).json({ error: error?.message ?? 'Failed to create Supabase user' });
     }
 
-    const profile = {
-      id: data.user.id,
-      email,
-      full_name: full_name ?? null,
-      role,
-    };
-
-    const { error: profileError } = await supabase.from('profiles').insert([profile]);
+    const { error: profileError } = await supabase
+      .from('profiles')
+      .upsert([
+        {
+          id: data.user.id,
+          email,
+          role,
+          full_name: full_name ?? null,
+        },
+      ], { onConflict: 'id' });
 
     if (profileError) {
       return res.status(500).json({ error: profileError.message });
