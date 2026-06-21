@@ -339,6 +339,18 @@ export function StudentDashboard({ user, onLogout }: Props) {
     };
   }, []);
 
+  useEffect(() => {
+    const handleStudentsChange = () => {
+      console.log("تم تحديث حالة الاشتراك، جاري إعادة تحميل البيانات...");
+      window.location.reload();
+    };
+
+    window.addEventListener("buytuk:students-changed", handleStudentsChange);
+    return () => {
+      window.removeEventListener("buytuk:students-changed", handleStudentsChange);
+    };
+  }, []);
+
   // Pull subscription from server on mount — ensures fresh status from any device
   useEffect(() => {
     syncEngine.subscriptionSync(user.email).then(updated => {

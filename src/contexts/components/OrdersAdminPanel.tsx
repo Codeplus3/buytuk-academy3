@@ -71,6 +71,7 @@ export function OrdersAdminPanel({ adminEmail, card }: Props) {
         : o
     );
     saveOrderRequests(updated);
+    window.dispatchEvent(new CustomEvent("buytuk:students-changed"));
     toast(`✅ تم قبول طلب ${order.orderRef} وتفعيل اشتراك ${order.studentName}`, "success");
   };
 
