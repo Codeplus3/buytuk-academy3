@@ -175,6 +175,36 @@ export function AdminDashboard({ user, onLogout }: Props) {
     return () => window.removeEventListener("ome-assets-updated", handler);
   }, []);
 
+  useEffect(() => {
+    let deferredPrompt: any = null;
+    const installBtn = document.getElementById('install-btn');
+
+    const beforeInstallPromptHandler = (event: Event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      if (installBtn) installBtn.style.display = 'block';
+    };
+
+    const installClickHandler = async () => {
+      if (!installBtn || !deferredPrompt) return;
+      installBtn.style.display = 'none';
+      (deferredPrompt as any).prompt();
+      const choiceResult = await (deferredPrompt as any).userChoice;
+      if (choiceResult.outcome === 'accepted') {
+        console.log('تم قبول التثبيت');
+      }
+      deferredPrompt = null;
+    };
+
+    window.addEventListener('beforeinstallprompt', beforeInstallPromptHandler as EventListener);
+    installBtn?.addEventListener('click', installClickHandler);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', beforeInstallPromptHandler as EventListener);
+      installBtn?.removeEventListener('click', installClickHandler);
+    };
+  }, []);
+
   const refreshRecovery = () => setRecoveryRequests(getRecoveryRequests());
 
   /* Generate a random 8-char alphanumeric temp password */
@@ -677,18 +707,7 @@ export function AdminDashboard({ user, onLogout }: Props) {
           <button onClick={onLogout} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(255,71,87,0.1)", border: "1px solid var(--danger)", borderRadius: "var(--radius-sm)", color: "var(--danger)", cursor: "pointer", fontSize: 13, fontWeight: 700 }}>خروج</button>
         </div>
       </nav>
-
-      <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 24, padding: "24px", maxWidth: 1400, margin: "0 auto" }} className="two-col">
-        <aside className="sidebar" style={{ height: "fit-content" }}>
-          <div style={{ marginBottom: 12, fontSize: 12, fontWeight: 700, color: "var(--text-muted)", letterSpacing: 1, padding: "0 4px" }}>القائمة</div>
-          {NAV.map(n => (
-            <button key={n.id} className={`menu-link ${tab === n.id ? "active" : ""}`} onClick={() => setTab(n.id)}
-              style={{ position: "relative" }}>
-              <span>{n.icon}</span>{n.label}
-              {!!n.badge && n.badge > 0 && (
-                <span style={{ position: "absolute", top: 6, insetInlineStart: 8, minWidth: 18, height: 18, borderRadius: 9, background: "var(--danger)", color: "#fff", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
-                  {n.badge}
-                </span>
+          <button id="install-btn" style={{ display: 'none', margin: '16px 24px', padding: '10px 16px', background: 'var(--primary)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>تثبيت التطبيق على الهاتف 📲</button>
               )}
             </button>
           ))}
