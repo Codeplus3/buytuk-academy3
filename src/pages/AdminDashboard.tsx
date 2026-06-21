@@ -707,12 +707,25 @@ export function AdminDashboard({ user, onLogout }: Props) {
           <button onClick={onLogout} style={{ display: "inline-flex", alignItems: "center", gap: 6, padding: "7px 14px", background: "rgba(255,71,87,0.1)", border: "1px solid var(--danger)", borderRadius: "var(--radius-sm)", color: "var(--danger)", cursor: "pointer", fontSize: 13, fontWeight: 700 }}>خروج</button>
         </div>
       </nav>
-          <button id="install-btn" style={{ display: 'none', margin: '16px 24px', padding: '10px 16px', background: 'var(--primary)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>تثبيت التطبيق على الهاتف 📲</button>
+      <button id="install-btn" style={{ display: 'none', margin: '16px 24px', padding: '10px 16px', background: 'var(--primary)', border: 'none', borderRadius: 'var(--radius-sm)', color: '#fff', cursor: 'pointer', fontSize: 14, fontWeight: 700 }}>تثبيت التطبيق على الهاتف 📲</button>
+
+      <div style={{ display: "grid", gridTemplateColumns: "220px 1fr", gap: 24, padding: "24px", maxWidth: 1400, margin: "0 auto" }} className="two-col">
+        <aside className="sidebar" style={{ height: "fit-content" }}>
+          <div style={{ marginBottom: 12, fontSize: 12, fontWeight: 700, color: "var(--text-muted)", letterSpacing: 1, padding: "0 4px" }}>القائمة</div>
+          {NAV.map(n => (
+            <button key={n.id} className={`menu-link ${tab === n.id ? "active" : ""}`} onClick={() => setTab(n.id)}
+              style={{ position: "relative" }}>
+              <span>{n.icon}</span>{n.label}
+              {!!n.badge && n.badge > 0 && (
+                <span style={{ position: "absolute", top: 6, insetInlineStart: 8, minWidth: 18, height: 18, borderRadius: 9, background: "var(--danger)", color: "#fff", fontSize: 11, fontWeight: 800, display: "flex", alignItems: "center", justifyContent: "center", padding: "0 4px" }}>
+                  {n.badge}
+                </span>
               )}
             </button>
           ))}
-          <div style={{ marginTop: 16, padding: 12, background: "rgba(108,99,255,0.08)", borderRadius: "var(--radius-sm)", fontSize: 12, textAlign: "center", color: "var(--text-muted)" }}>
-            <div style={{ fontSize: 20, marginBottom: 4 }}>⚡</div>HybridRuntime<br />Offline-First
+          <div style={{ marginTop: 16, padding: 12, background: "rgba(108,99,255,0.08)", borderRadius: "var(--radius-md)" }}>
+            <div style={{ fontSize: 20, marginBottom: 4 }}>⚡</div>
+            HybridRuntime<br />Offline-First
           </div>
         </aside>
 
