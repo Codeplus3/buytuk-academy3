@@ -127,7 +127,6 @@ export class OfflineMediaEngine {
     /* Step 1 — Resize frame */
     let processedFrame = imageBase64;
     try {
-      const { LocalVisionEngine } = await import("./skeleton/local-vision-engine");
       processedFrame = await LocalVisionEngine.resizeFrame(imageBase64, 1344);
     } catch { /* non-fatal — use original */ }
 
@@ -137,7 +136,6 @@ export class OfflineMediaEngine {
       try {
         const chunks = await getAllChunks();
         if (chunks.length > 0) {
-          const { LocalVectorSearch } = await import("./vector-search");
           const vs = new LocalVectorSearch();
           vs.buildIndex(chunks);
           const hits = vs.search(question, 4);

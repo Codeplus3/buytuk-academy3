@@ -16,11 +16,20 @@ export default defineConfig({
   },
   build: {
     outDir: "dist",
+    chunkSizeWarningLimit: 1200,
     rollupOptions: {
       output: {
         entryFileNames: `assets/[name]-[hash].js`,
         chunkFileNames: `assets/[name]-[hash].js`,
         assetFileNames: `assets/[name]-[hash].[ext]`,
+        manualChunks(id) {
+          if (id.includes('/node_modules/')) {
+            return 'vendor';
+          }
+          if (id.includes('/src/lib/offline-media-engine/')) {
+            return 'offline-media-engine';
+          }
+        },
       },
     },
   },

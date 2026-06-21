@@ -258,17 +258,50 @@ export function AdminDashboard({ user, onLogout }: Props) {
   };
 
   /* ─── TEACHER / SADMIN CRUD ─── */
+  const createSupabaseUser = async (role: string, fullName: string | null, email: string, password: string) => {
+    console.log("جاري محاولة إرسال طلب إنشاء مستخدم إلى /api/create-user", { email, role, fullName });
+    const res = await fetch('/api/create-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, role, full_name: fullName }),
+    });
+    console.log("استجابة /api/create-user HTTP:", res.status, res.statusText);
+
+    const payload = await res.json().catch(() => null);
+    console.log("بيانات /api/create-user:", payload);
+
+    if (!res.ok) {
+      throw new Error(payload?.error ?? 'خطأ في إنشاء المستخدم');
+    }
+
+    return payload;
+  };
+
   const addTeacher = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!userForm.name || !userForm.email || !userForm.pass || !userForm.spec || !userForm.school) { toast("يرجى ملء جميع الحقول", "error"); return; }
     const all = [...getStudents(), ...getTeachers(), ...getSAdmins()];
     if (all.find(u => u.email.toLowerCase() === userForm.email.toLowerCase())) { toast("البريد مستخدم بالفعل", "error"); return; }
     setLoading(true);
-    const passHash = await sha256(userForm.pass);
-    const t: Teacher = { id: Date.now(), name: userForm.name, email: userForm.email, passHash, spec: userForm.spec, schoolId: userForm.school, schoolName: schoolNames[userForm.school] ?? userForm.school, assignedSubjectIds: [], joinedAt: new Date().toLocaleDateString("ar-SA"), status: "active" };
-    const list = getTeachers(); list.push(t); saveTeachers(list);
-    setLoading(false); setUserForm(EMPTY_USER_FORM);
-    toast("تم إضافة الأستاذ بنجاح ✅", "success"); refresh();
+    try {
+      await createSupabaseUser('teacher', userForm.name, userForm.email.toLowerCase(), userForm.pass);
+      const passHash = await sha256(userForm.pass);
+      const t: Teacher = {
+        id: Date.now(), name: userForm.name, email: userForm.email.toLowerCase(), passHash,
+        spec: userForm.spec, schoolId: userForm.school,
+        schoolName: schoolNames[userForm.school] ?? userForm.school,
+        assignedSubjectIds: [], joinedAt: new Date().toLocaleDateString("ar-SA"), status: "active",
+      };
+      const list = getTeachers(); list.push(t); saveTeachers(list);
+      setUserForm(EMPTY_USER_FORM);
+      toast("تم إضافة الأستاذ بنجاح ✅", "success");
+      refresh();
+    } catch (err: unknown) {
+      console.error(err);
+      toast(`فشل إنشاء الأستاذ: ${(err as Error).message}`, "error");
+    } finally {
+      setLoading(false);
+    }
   };
   const addSAdmin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -276,11 +309,25 @@ export function AdminDashboard({ user, onLogout }: Props) {
     const all = [...getStudents(), ...getTeachers(), ...getSAdmins()];
     if (all.find(u => u.email.toLowerCase() === userForm.email.toLowerCase())) { toast("البريد مستخدم بالفعل", "error"); return; }
     setLoading(true);
-    const passHash = await sha256(userForm.pass);
-    const s: SchoolAdmin = { id: Date.now(), name: userForm.name, email: userForm.email, passHash, schoolId: userForm.school, schoolName: schoolNames[userForm.school] ?? userForm.school, joinedAt: new Date().toLocaleDateString("ar-SA"), status: "active" };
-    const list = getSAdmins(); list.push(s); saveSAdmins(list);
-    setLoading(false); setUserForm(EMPTY_USER_FORM);
-    toast("تم إضافة مدير المدرسة بنجاح ✅", "success"); refresh();
+    try {
+      await createSupabaseUser('school_admin', userForm.name, userForm.email.toLowerCase(), userForm.pass);
+      const passHash = await sha256(userForm.pass);
+      const s: SchoolAdmin = {
+        id: Date.now(), name: userForm.name, email: userForm.email.toLowerCase(), passHash,
+        schoolId: userForm.school,
+        schoolName: schoolNames[userForm.school] ?? userForm.school,
+        joinedAt: new Date().toLocaleDateString("ar-SA"), status: "active",
+      };
+      const list = getSAdmins(); list.push(s); saveSAdmins(list);
+      setUserForm(EMPTY_USER_FORM);
+      toast("تم إضافة مدير المدرسة بنجاح ✅", "success");
+      refresh();
+    } catch (err: unknown) {
+      console.error(err);
+      toast(`فشل إنشاء مدير المدرسة: ${(err as Error).message}`, "error");
+    } finally {
+      setLoading(false);
+    }
   };
   const deleteTeacher  = (id: number) => { if (!confirm("حذف هذا الأستاذ؟")) return; saveTeachers(getTeachers().filter(t => t.id !== id)); toast("تم حذف الأستاذ", "warning"); refresh(); };
   const deleteSAdmin   = (id: number) => { if (!confirm("حذف مدير المدرسة؟")) return; saveSAdmins(getSAdmins().filter(s => s.id !== id)); toast("تم الحذف", "warning"); refresh(); };
@@ -559,7 +606,6 @@ export function AdminDashboard({ user, onLogout }: Props) {
     refresh();
     /* Push to server immediately so student's device picks it up on next sync */
     try {
-      const { syncEngine } = await import("../lib/sync-engine");
       await syncEngine.pushSubscriptions();
     } catch { /* non-fatal — next auto-sync will cover it */ }
   };
@@ -1436,8 +1482,7 @@ export function AdminDashboard({ user, onLogout }: Props) {
                   onClick={async () => {
                     setSyncingSubscriptions(true);
                     try {
-                      const { manualSync } = await import("../lib/sync-engine").then(m => ({ manualSync: () => m.syncEngine.manualSync(undefined) }));
-                      await manualSync();
+                      await syncEngine.manualSync(undefined);
                       toast("✅ تم مزامنة الاشتراكات مع السيرفر بنجاح", "success");
                     } catch { toast("⚠️ تعذّرت مزامنة الاشتراكات — تحقق من الاتصال", "error"); }
                     finally { setSyncingSubscriptions(false); }
