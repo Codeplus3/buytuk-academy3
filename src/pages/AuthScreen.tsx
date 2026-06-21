@@ -194,27 +194,54 @@ export function AuthScreen({ onLogin }: Props) {
     setLoading(true);
     await new Promise(r => setTimeout(r, 600));
     try {
-      const hashed      = await sha256(loginPassword);
-      const normalEmail = loginEmail.trim().toLowerCase();
+      const cleanEmail = loginEmail.trim().toLowerCase();
+      const cleanPassword = loginPassword.trim();
 
-      if (normalEmail === "ahmed@buytuk.com") {
-        let hash = getAdminHash();
-        if (!hash) { hash = await sha256("buytuk9000"); setAdminHash(hash); }
-        if (hashed !== hash) throw new Error("invalid");
-        clearFailedAttempts(normalEmail);
-        onLogin("admin", { name: "Ahmed", email: "ahmed@buytuk.com" }); return;
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email: cleanEmail,
+        password: cleanPassword,
+      });
+
+      if (signInError) {
+        console.error("خطأ Supabase:", signInError);
+        alert("الخطأ الحقيقي: " + signInError.message);
+        throw signInError;
       }
-      const sAdmin = getSAdmins().find(u => u.email.toLowerCase() === normalEmail && u.passHash === hashed);
-      if (sAdmin)  { clearFailedAttempts(normalEmail); onLogin("school-admin", sAdmin);  return; }
-      const teacher = getTeachers().find(u => u.email.toLowerCase() === normalEmail && u.passHash === hashed);
-      if (teacher)  { clearFailedAttempts(normalEmail); onLogin("teacher", teacher);      return; }
-      const student = getStudents().find(u => u.email.toLowerCase() === normalEmail && u.passHash === hashed);
-      if (student)  { clearFailedAttempts(normalEmail); onLogin("student", student);      return; }
-      const parent  = getParents().find(u => u.email.toLowerCase() === normalEmail && u.passHash === hashed && u.status === "active");
-      if (parent)   { clearFailedAttempts(normalEmail); onLogin("parent", parent);        return; }
-      const support = getSupportAgents().find(u => u.email.toLowerCase() === normalEmail && u.passHash === hashed && u.status === "active");
-      if (support)  { clearFailedAttempts(normalEmail); onLogin("support", support as Parameters<typeof onLogin>[1]); return; }
-      throw new Error("invalid");
+
+      console.log("تم الدخول بنجاح:", signInData);
+
+      const { data: userProfile, error: profileError } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', signInData.user?.id)
+        .single();
+
+      if (profileError) {
+        console.error("خطأ في قراءة البروفايل:", profileError.message);
+        alert("خطأ في قراءة البروفايل: " + profileError.message);
+      } else {
+        console.log("تم جلب البروفايل بنجاح:", userProfile);
+      }
+
+      if (cleanEmail === "ahmed@buytuk.com") {
+        clearFailedAttempts(cleanEmail);
+        onLogin("admin", { name: "Ahmed", email: cleanEmail });
+        return;
+      }
+      const sAdmin = getSAdmins().find(u => u.email.toLowerCase() === cleanEmail);
+      if (sAdmin)  { clearFailedAttempts(cleanEmail); onLogin("school-admin", sAdmin);  return; }
+      const teacher = getTeachers().find(u => u.email.toLowerCase() === cleanEmail);
+      if (teacher)  { clearFailedAttempts(cleanEmail); onLogin("teacher", teacher);      return; }
+      const student = getStudents().find(u => u.email.toLowerCase() === cleanEmail);
+      if (student)  { clearFailedAttempts(cleanEmail); onLogin("student", student);      return; }
+      const parent  = getParents().find(u => u.email.toLowerCase() === cleanEmail && u.status === "active");
+      if (parent)   { clearFailedAttempts(cleanEmail); onLogin("parent", parent);        return; }
+      const support = getSupportAgents().find(u => u.email.toLowerCase() === cleanEmail && u.status === "active");
+      if (support)  { clearFailedAttempts(cleanEmail); onLogin("support", support as Parameters<typeof onLogin>[1]); return; }
+
+      clearFailedAttempts(cleanEmail);
+      onLogin("student", { name: userProfile?.full_name ?? cleanEmail, email: cleanEmail });
+      return;
     } catch {
       /* Record failed attempt + check if now locked */
       const result = recordFailedAttempt(loginEmail.trim().toLowerCase());
