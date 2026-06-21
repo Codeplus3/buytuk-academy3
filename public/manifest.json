@@ -1,46 +1,20 @@
 {
   "name": "BuyTuk Academy",
-  "short_name": "BuyTuk Academy",
-  "description": "نظام تعليمي ذكي متكامل يربط المدارس والأساتذة والطلاب في بيئة رقمية واحدة — يعمل بلا إنترنت",
-  "lang": "ar",
-  "dir": "rtl",
-  "start_url": "./",
-  "scope": "./",
+  "short_name": "BuyTuk",
+  "start_url": "/",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone"],
-  "orientation": "portrait-primary",
-  "background_color": "#0f1117",
-  "theme_color": "#6d28d9",
-  "categories": ["education"],
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
   "icons": [
     {
-      "src": "./icons/icon-192.svg",
+      "src": "/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "./icons/icon-512.svg",
+      "src": "/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "./icons/icon-maskable.svg",
-      "sizes": "512x512",
-      "type": "image/svg+xml",
-      "purpose": "maskable"
-    }
-  ],
-  "screenshots": [],
-  "related_applications": [],
-  "prefer_related_applications": false,
-  "shortcuts": [
-    {
-      "name": "موادّي",
-      "short_name": "موادّي",
-      "description": "الانتقال مباشرة إلى الموادّ الدراسية",
-      "url": "./"
+      "type": "image/png"
     }
   ]
 }
