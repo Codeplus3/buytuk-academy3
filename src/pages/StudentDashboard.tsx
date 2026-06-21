@@ -541,6 +541,18 @@ export function StudentDashboard({ user, onLogout }: Props) {
 
   const card = { background: "var(--card)", border: "1px solid var(--glass-border)", borderRadius: "var(--radius)", padding: 20 } as const;
   const label12 = { display: "block" as const, fontSize: 12, color: "var(--text-muted)", marginBottom: 5, fontWeight: 600 as const };
+  const studentData = getStudents().find(s => s.id === user.id) ?? user;
+
+  if (!studentData || !studentData.id || !studentData.email) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-blue-600 text-white">
+        <h1 className="text-2xl font-bold">جاري تهيئة حسابك...</h1>
+        <p className="mt-3 text-center max-w-md">
+          إذا استمرت هذه الصفحة، يرجى التواصل مع الإدارة لتفعيل ملفك الشخصي.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div>

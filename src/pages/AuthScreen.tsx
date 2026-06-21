@@ -282,12 +282,10 @@ export function AuthScreen({ onLogin }: Props) {
     if (data?.user) {
       const { error: profileError } = await supabase
         .from('profiles')
-        .insert([
+        .upsert(
           { id: data.user.id, email: regEmail.toLowerCase(), full_name: regName.trim() },
-        ]);
-
-      if (profileError) {
-        console.error("❌ خطأ في إضافة البروفايل:", profileError.message);
+          { onConflict: 'id' },
+        );
       } else {
         console.log("✅ تمت إضافة البيانات بنجاح إلى جدول profiles!");
       }
