@@ -23,6 +23,8 @@ interface Session {
   user: User;
 }
 
+// Deployment revision marker: updated output hashing configuration
+
 export default function App() {
   const [session,     setSession]     = useState<Session | null>(null);
   const [idleWarnSec, setIdleWarnSec] = useState(0); // > 0 shows warning overlay
